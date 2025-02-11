@@ -1,0 +1,10 @@
+<div style="width: 250px; height: 93vh; background: #545454; margin-right: 20px; border-radius: 20px; padding: 10px;">
+    <div>
+        logo
+    </div>
+    <div style="display: flex; flex-direction: column;">
+        @for(i of menu; track  $index){
+            <app-buttom-nav title={{i.title}}></app-buttom-nav>
+        }
+    </div>
+</div>

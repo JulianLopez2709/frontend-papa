@@ -1,0 +1,23 @@
+<style>
+    div {}
+</style>
+
+<div style="display: flex; flex-direction: row; gap: 20px; max-width: 100%; height: 100%; ">
+    <!-- Tarjeta Card New: ocupa el espacio restante -->
+    <div style="background: #545454; flex: 1; border-radius: 20px; padding: 15px;">
+        @for(item of orders; track $index){
+            <div style="margin-bottom: 10px;">
+                <app-new-order-card [order]="item"></app-new-order-card>
+            </div>
+        }
+    </div>
+
+    <!-- Tarjeta Card Day: ancho fijo -->
+    <div style="background: #545454; width: 280px; border-radius: 20px; padding: 7px;">
+        @for(item of orderDay; track $index){
+            <div style="margin-bottom: 10px;">
+                <app-today-order-card [food]="item"></app-today-order-card>
+            </div>
+        }    
+    </div>
+</div>
