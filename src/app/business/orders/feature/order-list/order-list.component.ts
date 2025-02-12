@@ -19,6 +19,7 @@ export class OrderListComponent implements OnInit, OnDestroy {
   textEmpty = ""
   private alimentosSubscription!: Subscription;
   orders: OrderResponde[] = [];
+  totalDay = 0
   orderDay !: any
 
   constructor(private socket: WebSocketService, private http : OrderService) { }
@@ -28,10 +29,7 @@ export class OrderListComponent implements OnInit, OnDestroy {
         this.orders = data
     })
 
-    this.http.getOrderDay().subscribe((data)=>{
-      console.log(data)
-        this.orderDay = data
-    })
+    this.loadOrderDay()
 
     /*this.socket.listen<Order[]>('server:loadOrder').subscribe((order) => {
       console.log('Nueva orden recibida:', order);
@@ -40,8 +38,20 @@ export class OrderListComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnDestroy(): void {
+  loadOrderDay() {
+    this.http.getOrderDay().subscribe((data) => {
+      this.orderDay = data;
+    });
+  }
 
+
+  update(data : {orderId:number, status:string}){
+    this.socket.patchStatusOrderService(data)
+    this.loadOrderDay()
+  }
+
+  ngOnDestroy(): void {
+    this.socket.disconnect()
   }
 
 }

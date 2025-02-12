@@ -5,33 +5,12 @@ import { Food } from '../../../../model/food';
   selector: 'app-today-order-card',
   standalone: true,
   imports: [],
-  template: `
-    <div class="container">
-      <div>
-      <p>#{{food.order_id}}
-      </p>
-        <div class="img"></div>
-      </div>
-      <div>
-      @for(item of food.order_foods; track $index){
-        <p style="">
-        {{item.food.name}}
-        </p>
-        }
-      </div>
-      <div style="display:flex; justify-content: center;  align-items: end;">
-        <div  class="price">
-          <p>{{food.total_price}}</p>
-        </div>
-      </div>
-    </div>
-  `,
+  templateUrl : './today-order-card.component.html',
   styles: `
     .container{
       display:flex;
     justify-content: space-between;
       padding: 15px;
-      background : black;
       border-radius: 20px;
     }
 

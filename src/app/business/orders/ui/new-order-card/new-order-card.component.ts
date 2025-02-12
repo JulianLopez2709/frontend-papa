@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Food } from '../../../../model/food';
 import { OrderResponde } from '../../../../model/order';
 import { DatePipe } from '@angular/common';
@@ -50,8 +50,14 @@ export class NewOrderCardComponent {
   constructor(private datePipe: DatePipe) { }
   @Input() order!: OrderResponde;
 
+  @Output() clicked = new EventEmitter<{orderId:number, status : string}>()
+
 
   formatDate(data:string){
     return this.datePipe.transform(data, 'dd MMM yyyy, hh:mm a')
+  }
+
+  handleClick(orderId: number, status: string){
+    this.clicked.emit({orderId,status})
   }
 }

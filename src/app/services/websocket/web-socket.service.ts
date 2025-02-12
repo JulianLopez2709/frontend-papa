@@ -10,22 +10,25 @@ import { OrderResponde } from '../../model/order';
 export class WebSocketService {
   socket = io("ws://localhost:3000/", {})
 
-  constructor(){}
+  constructor() { }
 
-  getOrder(){
-    return new Observable<OrderResponde[]>( observable => {
-      this.socket.on("server:loadOrder", (data)=>{
+  getOrder() {
+    return new Observable<OrderResponde[]>(observable => {
+      this.socket.on("server:loadOrder", (data) => {
         observable.next(data)
       })
     })
   }
-  /*private socket!: Socket;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
-    if (isPlatformBrowser(this.platformId)) {
-      this.connect()
-    }
+
+  patchStatusOrderService(data: {}) {
+    this.socket.emit("client:patchStatus", data)
   }
+
+  disconnect(){
+    this.socket.disconnect()
+  }
+  /*private socket!: Socket;
 
   private connect() {
     this.socket = io("ws://localhost:3000/", {
@@ -42,7 +45,6 @@ export class WebSocketService {
   /*listen<T>(eventName: string): Observable<T> {
     return new Observable<T>(observer => {
       this.socket.on(eventName, (data: T) => observer.next(data));
-      return () => this.socket.off(eventName);
     });
   }
 

@@ -15,4 +15,5 @@ export class OrderService {
   getOrderDay(){
     return this.http.get(`${this.apiUrl}/order/day`)
   }
+  
 }

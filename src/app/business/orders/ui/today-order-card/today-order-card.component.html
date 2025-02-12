@@ -1,0 +1,19 @@
+<div style="background: {{ food.order_status === 'confirmed' ? '#FFBC2B' : '#FF432B' }};" class="container">
+    <div>
+        <p>#{{food.order_id}}
+        </p>
+        <div class="img"></div>
+    </div>
+    <div>
+        @for(item of food.order_foods; track $index){
+        <p style="font-size: small;">
+            {{item.food.name}}
+        </p>
+        }
+    </div>
+    <div style="display:flex; justify-content: center;  align-items: end;">
+        <div class="price">
+            <p>{{food.total_price}}</p>
+        </div>
+    </div>
+</div>
