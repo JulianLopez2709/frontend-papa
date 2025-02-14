@@ -4,11 +4,12 @@ import { CardFoodComponent } from './ui/card-food/card-food.component';
 import { Observable } from 'rxjs';
 import { Food } from '../model/food';
 import { AsyncPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CardFoodComponent, AsyncPipe],
+  imports: [CardFoodComponent, AsyncPipe, RouterLink],
   templateUrl: './home.component.html',
   styles: ``
 })

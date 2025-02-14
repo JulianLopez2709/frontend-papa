@@ -17,16 +17,23 @@ import { OrderService } from '../../data-access/order.service';
 export class OrderListComponent implements OnInit, OnDestroy {
 
   textEmpty = ""
-  private alimentosSubscription!: Subscription;
   orders: OrderResponde[] = [];
   totalDay = 0
   orderDay !: any
 
-  constructor(private socket: WebSocketService, private http : OrderService) { }
+  constructor(private socket: WebSocketService, private http: OrderService) { }
 
   ngOnInit() {
-    this.socket.getOrder().subscribe((data)=>{
-        this.orders = data
+    this.socket.connect()
+
+    this.socket.getOrder().subscribe((data) => {
+      const previousLength = Number(localStorage.getItem('orderCount')) || 0;
+
+      if (data.length > previousLength) {
+        this.showNotification();
+      }
+      localStorage.setItem('orderCount', String(data.length))
+      this.orders = data
     })
 
     this.loadOrderDay()
@@ -45,13 +52,29 @@ export class OrderListComponent implements OnInit, OnDestroy {
   }
 
 
-  update(data : {orderId:number, status:string}){
+  update(data: { orderId: number, status: string }) {
     this.socket.patchStatusOrderService(data)
     this.loadOrderDay()
   }
 
   ngOnDestroy(): void {
     this.socket.disconnect()
+  }
+
+
+
+  showNotification() {
+    const audio = new Audio('audio/notification.mp3');
+    audio.play();
+    if (Notification.permission === 'granted') {
+      new Notification('Nueva Orden', { body: 'Se ha recibido una nueva orden en la cocina 🍽️' });
+    } else if (Notification.permission !== 'denied') {
+      Notification.requestPermission().then(permission => {
+        if (permission === 'granted') {
+          new Notification('Nueva Orden', { body: 'Se ha recibido una nueva orden en la cocina 🍽️' });
+        }
+      });
+    }
   }
 
 }

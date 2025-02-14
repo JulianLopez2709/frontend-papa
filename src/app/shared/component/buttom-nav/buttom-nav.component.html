@@ -1,21 +1,30 @@
 <style>
-    button{
+    button {
         width: 100%;
         padding: 15px 10px;
-        border-radius: 10px;
+        border-radius: 20px;
+        background : none;
+        color: black;
+        border: none;
+        cursor: pointer;
+        transition: background 0.3s, color 0.3s;
+    }
+
+    button:hover {
+        background: #b9b9b9;
+    }
+
+    button.active {
         background: black;
         color: white;
     }
-    button:hover{
-        background: gray ;
-        opacity: 40%;
-    }
-    p{
+
+    p {
         text-align: start;
         font-weight: 700;
     }
 </style>
-<button>
+<button [routerLink]="path" [ngClass]="{ 'active': isActive }">
     <p class="">
         {{title}}
     </p>

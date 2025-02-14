@@ -20,13 +20,16 @@ export class WebSocketService {
     })
   }
 
-
   patchStatusOrderService(data: {}) {
     this.socket.emit("client:patchStatus", data)
   }
 
   disconnect(){
     this.socket.disconnect()
+  }
+
+  connect(){
+    this.socket.connect()
   }
   /*private socket!: Socket;
 

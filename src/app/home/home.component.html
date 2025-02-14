@@ -7,12 +7,12 @@
         gap: 10px;
     }
 
-    .content { 
+    .content {
         max-width: 1400px;
         color: black;
         display: grid;
         margin: auto;
-        grid-template-columns: repeat(4,1fr);
+        grid-template-columns: repeat(4, 1fr);
         justify-content: center;
         gap: 15px 30px;
         align-items: center;
@@ -20,23 +20,23 @@
 
 
     @media (max-width: 1200px) {
-        .content{
-            grid-template-columns: repeat(3,1fr);
-            padding: 0px 15px; 
+        .content {
+            grid-template-columns: repeat(3, 1fr);
+            padding: 0px 15px;
         }
     }
 
 
     @media (max-width: 650px) {
-        .content{
-            grid-template-columns: repeat(2,1fr);
+        .content {
+            grid-template-columns: repeat(2, 1fr);
         }
     }
 
 
     @media (max-width: 400px) {
-        .content{
-            grid-template-columns: repeat(1,1fr);
+        .content {
+            grid-template-columns: repeat(1, 1fr);
         }
     }
 </style>
@@ -44,13 +44,28 @@
     <div class="home-header">
         <img src="lapapalarge.jpg" alt="" style="height: 50px;">
         <div>
-            <button>Login</button>
-            <button>Register</button>
+            <button routerLink="/auth" style=" padding: 15px 10px;
+    border-radius: 20px;
+    background: none;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;">
+                Iniciar
+            </button>
+            <button routerLink="/auth" style="width: 120px; padding: 15px 10px;
+    border-radius: 20px;
+    background : #FFBC2B;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;">
+                Registrarse
+            </button>
         </div>
     </div>
     <div class="content">
         @for (item of foodList$; track $index){
-            <app-card-food [food]="item"></app-card-food>
+        <app-card-food [food]="item"></app-card-food>
         }
     </div>
     <footer style="margin-top: 30px;">
