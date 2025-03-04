@@ -12,6 +12,7 @@ export interface FoodResonde {
 export interface OrderFood {
     extras: string[];
     food: FoodResonde;
+    notes : string;
 }
 
 export interface OrderResponde {
@@ -22,4 +23,5 @@ export interface OrderResponde {
     createdAt: string;
     updatedAt: string;
     order_foods: OrderFood[];
+    table : number;
 }

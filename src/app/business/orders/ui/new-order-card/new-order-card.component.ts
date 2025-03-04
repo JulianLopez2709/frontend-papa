@@ -7,7 +7,7 @@ import { DatePipe } from '@angular/common';
   selector: 'app-new-order-card',
   standalone: true,
   imports: [],
-  providers : [DatePipe],
+  providers: [DatePipe],
   templateUrl: './new-order-card.component.html',
   styles: `
     .container{
@@ -33,6 +33,7 @@ import { DatePipe } from '@angular/common';
 
     .img-food{
       margin-right: 7px;
+      background-size:cover;  
       background: #D9D9D9;
       height: 80px;
       width: 80px;
@@ -43,21 +44,56 @@ import { DatePipe } from '@angular/common';
       .detail-food{
         display: none;
       }
-}
+    }
+    .btn-canceled{
+    background : white;
+    }
+
+    .btn-canceled{
+      background : white;
+      color : red;
+    }
+    .btn-confirmed{
+      background : green;
+      color : white;
+    }
+
+    .btn-canceled:hover{
+      background : red;
+      color:white;
+    }
+
+    .btn-confirmed:hover{
+      background:#2e942f;
+      color : white;
+      }
+
   `
 })
 export class NewOrderCardComponent {
   constructor(private datePipe: DatePipe) { }
   @Input() order!: OrderResponde;
 
-  @Output() clicked = new EventEmitter<{orderId:number, status : string}>()
+  @Output() clicked = new EventEmitter<{ orderId: number, status: string }>()
 
 
-  formatDate(data:string){
+  formatDate(data: string) {
     return this.datePipe.transform(data, 'dd MMM yyyy, hh:mm a')
   }
 
-  handleClick(orderId: number, status: string){
-    this.clicked.emit({orderId,status})
+  handleClick(orderId: number, status: string) {
+    this.clicked.emit({ orderId, status })
+  }
+
+
+  getFoodImage(foodType: string): string {
+    switch (foodType) {
+      case "drink":
+        return "drink.jpg";
+      case "icecream":
+        return "icecream.jpg";
+      default:
+        return "fries.jpg";
+    }
   }
 }
