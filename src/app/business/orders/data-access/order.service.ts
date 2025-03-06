@@ -9,7 +9,7 @@ import { Food } from '../../../model/food';
 export class OrderService {
   constructor(private http: HttpClient) { }
 
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'https://lapapaback-production.up.railway.app';
 
 
   getOrderDay(){

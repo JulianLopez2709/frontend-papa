@@ -8,7 +8,7 @@ import { OrderResponde } from '../../model/order';
   providedIn: 'root'
 })
 export class WebSocketService {
-  socket = io("ws://localhost:3000/", {})
+  socket = io("https://lapapaback-production.up.railway.app/", {})
 
   constructor() { }
 
