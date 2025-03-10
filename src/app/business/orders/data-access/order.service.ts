@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Food } from '../../../model/food';
+import { environment } from "../../../../environments/environment";
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { Food } from '../../../model/food';
 export class OrderService {
   constructor(private http: HttpClient) { }
 
-  private apiUrl = 'https://lapapaback-production.up.railway.app';
+  private apiUrl = environment.BASE_URL;
 
 
   getOrderDay(){

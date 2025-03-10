@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Food } from '../../model/food';
 import { catchError, Observable, throwError } from 'rxjs';
+import { environment } from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { catchError, Observable, throwError } from 'rxjs';
 export class FoodService {
 
   constructor(private http : HttpClient) { }
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = environment.BASE_URL;
 
 
   getAllFoods(): Observable<Food[]>{
