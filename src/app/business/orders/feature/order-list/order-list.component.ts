@@ -62,7 +62,6 @@ export class OrderListComponent implements OnInit, OnDestroy {
   }
 
 
-
   showNotification() {
     const audio = new Audio('audio/notification.mp3');
     audio.play();
