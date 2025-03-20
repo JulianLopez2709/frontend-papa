@@ -1,14 +1,16 @@
-<div style="width: 250px; height: 93vh; background: #D9D9D9; margin-right: 20px; border-radius: 20px; padding: 10px; display: flex; flex-direction: column; justify-content: space-between;">
-    <div>
-        <img  style="width: 100%; border-radius: 10px;" src="lapapalarge.jpg" alt="logo papa">
-        <div style="display: flex; flex-direction: column;">
-            @for(item of menu; track $index){
-                <app-buttom-nav [title]="item.title" [path]="item.path"></app-buttom-nav>
-            }
+<nav style="width: 280px; flex-shrink: 0;">
+
+    <div style="width: 250px; height: 93vh; background: #D9D9D9; margin-right: 20px; border-radius: 20px; padding: 10px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+            <img  style="width: 100%; border-radius: 10px;" src="lapapalarge.jpg" alt="logo papa">
+            <div style="display: flex; flex-direction: column;">
+                @for(item of menu; track $index){
+                    <app-buttom-nav [title]="item.title" [path]="item.path"></app-buttom-nav>
+                }
+            </div>
         </div>
-    </div>
-    <button routerLink="" 
-    style="width: 100%; padding: 15px 10px;
+        <button routerLink="" 
+        style="width: 100%; padding: 15px 10px;
     border-radius: 20px;
     background : black;
     color: white;
@@ -18,3 +20,4 @@
         Salir
     </button>
 </div>
+</nav>
