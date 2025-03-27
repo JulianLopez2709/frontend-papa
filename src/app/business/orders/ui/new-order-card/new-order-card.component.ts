@@ -26,6 +26,13 @@ import { DatePipe } from '@angular/common';
       border-radius: 100%;
     }
 
+    .food-grid{
+    display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas de igual ancho */
+  gap: 20px; /* Espacio entre tarjetas */
+  padding: 15px;
+    }
+
     .detail-food{
       display:flex;
       margin-bottom: 8px;
@@ -40,9 +47,13 @@ import { DatePipe } from '@angular/common';
       border-radius: 100%;
     }
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1400px) {
       .detail-food{
-        display: none;
+
+      }
+
+      .food-grid{
+        grid-template-columns: repeat(1, 1fr);
       }
     }
     .btn-canceled{
@@ -82,7 +93,31 @@ export class NewOrderCardComponent {
   }
 
   handleClick(orderId: number, status: string) {
+    if (status == "preparing") {
+      status = "eating"
+    } else if (status == "eating") {
+      status = "confirmed"
+    } else {
+      return
+    }
+
     this.clicked.emit({ orderId, status })
+  }
+
+
+  getStatusText(status: string): string {
+    switch (status) {
+      case 'preparing':
+        return 'Cocina';
+      case 'eating':
+        return 'Pendiente';
+      case 'confirmed':
+        return 'Confirmado';
+      case 'canceled':
+        return 'Cancelado';
+      default:
+        return status; // Por si hay otro estado no contemplado
+    }
   }
 
 

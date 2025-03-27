@@ -29,11 +29,19 @@ export class OrderListComponent implements OnInit, OnDestroy {
     this.socket.getOrder().subscribe((data) => {
       const previousLength = Number(localStorage.getItem('orderCount')) || 0;
 
-      if (data.length > previousLength) {
-        this.showNotification();
+      const filteredOrders = data.filter(order =>
+        order.order_status === 'preparing' || order.order_status === 'eating'
+      ).sort((a, b) => {
+        if (a.order_status === 'preparing' && b.order_status !== 'preparing') return -1;
+        if (a.order_status !== 'preparing' && b.order_status === 'preparing') return 1;
+        return 0;
+      });
+
+      if (filteredOrders.length > previousLength) {
+        this.showNotification("Nuevo Orden","Se ha recibido una nueva orden en la cocina 🍽️");
       }
-      localStorage.setItem('orderCount', String(data.length))
-      this.orders = data
+      localStorage.setItem('orderCount', String(filteredOrders.length))
+      this.orders = filteredOrders
     })
 
     this.loadOrderDay()
@@ -55,6 +63,7 @@ export class OrderListComponent implements OnInit, OnDestroy {
   update(data: { orderId: number, status: string }) {
     this.socket.patchStatusOrderService(data)
     this.loadOrderDay()
+    //this.showNotification("Modificación", `Se AGREGO producto a la order: ${data.orderId}`)
   }
 
   ngOnDestroy(): void {
@@ -62,15 +71,15 @@ export class OrderListComponent implements OnInit, OnDestroy {
   }
 
 
-  showNotification() {
+  showNotification(title :string, message: string) {
     const audio = new Audio('audio/notification.mp3');
     audio.play();
     if (Notification.permission === 'granted') {
-      new Notification('Nueva Orden', { body: 'Se ha recibido una nueva orden en la cocina 🍽️' });
+      new Notification(title, { body:  message });
     } else if (Notification.permission !== 'denied') {
       Notification.requestPermission().then(permission => {
         if (permission === 'granted') {
-          new Notification('Nueva Orden', { body: 'Se ha recibido una nueva orden en la cocina 🍽️' });
+          new Notification(title, { body: message });
         }
       });
     }

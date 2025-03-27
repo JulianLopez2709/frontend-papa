@@ -1,37 +1,40 @@
 <div class="container ">
     <div class="" style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
         <div>
-            <p style="font-weight: 700; font-size: 20px;">Order #{{order.order_id}}</p>
+            <p style="font-weight: 700; font-size: large; margin-right: 5px;">Mesa {{order.table}}</p>
             <p>{{formatDate(order.createdAt)}}</p>
         </div>
-        <div style="display: flex; align-items: center;">
-            <p style="font-weight: 700; font-size: large; margin-right: 5px;">Mesa {{order.table}}</p>
-            <div class="avatar-user"></div>
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <p style="font-weight: 700; font-size: 20px; margin-right: 10px">Order #{{order.order_id}}</p>
+            <p style="background: orange; border-radius: 5px; padding: 5px;"> {{ getStatusText(order.order_status) }}</p>
+            <!--<div class="avatar-user"></div>-->
         </div>
     </div>
 
-    @for(item of order.order_foods; track $index){
-    <div class="detail-food">
-        <img class="img-food" src="{{getFoodImage(item.food.type)}}">
+    <div class="food-grid">
+        @for(item of order.order_foods; track $index){
+        <div class="detail-food" >
+            <img class="img-food" src="{{getFoodImage(item.food.type)}}">
 
-        <div style="width: 950px;">
-            <p style="font-weight: 700;">{{item.food.name}}</p>
-            <p style="margin-bottom:7px;">{{item.food.description}}</p>
-            <div style="display:flex; gap: 10px;">
-                @for(extras of item.extras; track $index){
-                <p style="margin-bottom:7px;">{{extras}}</p>
-                }
-            </div>
-            <p style="margin-bottom:7px;">{{item.notes}}</p>
+            <div>
+                <p style="font-weight: 700;">{{item.food.name}}</p>
+                <p style="margin-bottom:7px;">{{item.food.description}}</p>
+                <div style="display:flex; gap: 10px;">
+                    @for(extras of item.extras; track $index){
+                    <p style="margin-bottom:7px;">{{extras}}</p>
+                    }
+                </div>
+                <p style="margin-bottom:7px;">{{item.notes}}</p>
 
-            <div class="" style="display:flex; justify-content: space-between; align-items: center;">
-                <p style="font-weight: 700;">${{item.food.price}}</p>
-                <!--<p>duracion</p>-->
+                <div class="" >
+                    <p style="font-weight: 700;">${{item.food.price}}</p>
+                    <!--<p>duracion</p>-->
+                </div>
             </div>
         </div>
-    </div>
-    }
+        }
 
+    </div>
     <div
         style=" display:flex; justify-content: space-between; align-items: center; border-top: 1px solid gray; padding-top:7px;">
         <div>
@@ -40,16 +43,13 @@
         </div>
 
         <div style="display:flex;">
-            <button
-                class="btn-canceled"
+            <button class="btn-canceled"
                 style="cursor: pointer; height: 42px; width: 42px; border-radius: 10px; border:1px solid red; margin-right:10px"
                 (click)="handleClick(order.order_id,'canceled')">
                 x
             </button>
-            <button
-                class="btn-confirmed"
-                style="cursor: pointer;height: 42px; border-radius: 10px; border: none;"
-                (click)="handleClick(order.order_id,'confirmed')">
+            <button class="btn-confirmed" style="cursor: pointer;height: 42px; border-radius: 10px; border: none;"
+                (click)="handleClick(order.order_id,order.order_status)">
                 Orden completada
             </button>
         </div>

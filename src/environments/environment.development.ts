@@ -1,3 +1,3 @@
 export const environment = {
-    BASE_URL : "https://lapapaback-production.up.railway.app"
+    BASE_URL : "http://localhost:3001"
 };

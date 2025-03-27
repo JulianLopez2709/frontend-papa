@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { Food } from '../../../../model/food';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-today-order-card',
   standalone: true,
-  imports: [],
+  imports: [NgStyle],
   templateUrl : './today-order-card.component.html',
   styles: `
     .container{

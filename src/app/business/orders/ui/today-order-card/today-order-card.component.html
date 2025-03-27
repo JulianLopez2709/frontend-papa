@@ -1,4 +1,4 @@
-<div style="background: {{ food.order_status === 'confirmed' ? '#FFBC2B' : '#FF432B' }};" class="container">
+<div [ngStyle]="{'background': food.order_status === 'canceled' ? '#FF432B' : '#FFBC2B'}" class="container">
     <div>
         <p>#{{food.order_id}}
         </p>
