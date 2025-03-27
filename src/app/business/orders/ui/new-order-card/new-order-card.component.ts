@@ -97,9 +97,7 @@ export class NewOrderCardComponent {
       status = "eating"
     } else if (status == "eating") {
       status = "confirmed"
-    } else {
-      return
-    }
+    } 
 
     this.clicked.emit({ orderId, status })
   }
