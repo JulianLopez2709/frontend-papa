@@ -1,5 +1,5 @@
 export const environment = {
-    BASE_URL : "http://localhost:3000"
+    BASE_URL : "https://lapapaback-production.up.railway.app"
 };
 
 //hacer peticion variable produccion 'ng serve -c production'
